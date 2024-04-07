@@ -1,0 +1,28 @@
+{
+  "name": "e-presence",
+  "version": "1.0.0",
+  "description": "e-presence for backend developer test script",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon app.js"
+  },
+  "author": "Sanjaya",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.12.1",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "luxon": "^3.4.4",
+    "nodemon": "^3.1.0",
+    "prisma": "^5.12.1"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  }
+}

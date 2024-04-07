@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id             Int             @id @default(autoincrement())
+  email          String          @unique
+  name           String
+  npp            String          @unique
+  supervisor_npp String?
+  password       String          @db.Text
+  supervisor     users?          @relation("SuperviseEmployees", fields: [supervisor_npp], references: [npp])
+  employees      users[]         @relation("SuperviseEmployees")
+  presences      epresences[]
+  access_tokens  access_tokens[]
+}
+
+model access_tokens {
+  id           String   @id @default(uuid())
+  user_id      Int
+  access_token String   @db.Text
+  active       Boolean
+  expires      DateTime
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  user         users    @relation(fields: [user_id], references: [id])
+}
+
+model epresences {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  type       String
+  is_approve Boolean?
+  time       DateTime
+  employee   users    @relation(fields: [user_id], references: [id])
+
+  @@index([user_id])
+}
+
+enum types {
+  IN
+  OUT
+}
