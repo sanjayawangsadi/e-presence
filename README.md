@@ -10,5 +10,5 @@ npx prisma db push
 ```
 The last step run this command to seed the application data
 ```
-run npx prisma
+npx prisma db seed
 ```
