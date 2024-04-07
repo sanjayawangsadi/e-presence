@@ -1,14 +1,14 @@
-# e-presence
+# E-Presence Backend
 
-First step you must run this command to access this code
+The first step you must run this command to access this code
 ```
 npm install
 ```
-Second step you must run this command to migrate this code
+The second step you must run this command to migrate this code
 ```
 npx prisma db push
 ```
-Last step run this command to seed the application data
+The last step run this command to seed the application data
 ```
 run npx prisma
 ```

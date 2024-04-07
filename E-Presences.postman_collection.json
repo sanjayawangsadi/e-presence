@@ -1,0 +1,677 @@
+{
+	"info": {
+		"_postman_id": "fdc8ad6a-a801-47ad-aa57-f92996fc2f8e",
+		"name": "E-Presences",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21029630"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Access Token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"bayu@email.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/access-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"access-token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Access Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"bayu@email.com\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/access-token",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"access-token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "581"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"245-MdFPopVoKrUwkZ/LMYBeaBRWKcI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Apr 2024 08:24:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success generate access token\",\n    \"data\": {\n        \"token_type\": \"Bearer\",\n        \"expires_in\": 7200,\n        \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiQW5hbmRhIEJheXUiLCJlbWFpbCI6ImJheXVAZW1haWwuY29tIiwibnBwIjoiMTIzNDUiLCJpc19zdXBlcnZpc29yIjp0cnVlLCJzdXBlcnZpc29yIjp7Im5hbWUiOiJTdXBlcnZpc29yIiwibnBwIjoiMTExMTEifSwiaWF0IjoxNzEyMzkxODQ0LCJleHAiOjE3MTIzOTkwNDR9.ZP3Sw2MdQ9DTdM_dlgHnCaekyxCGSZa-r0i5fgpxiEI\",\n        \"profile\": {\n            \"user_id\": 1,\n            \"name\": \"Ananda Bayu\",\n            \"email\": \"bayu@email.com\",\n            \"npp\": \"12345\",\n            \"is_supervisor\": true,\n            \"supervisor\": {\n                \"name\": \"Supervisor\",\n                \"npp\": \"11111\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Revoke Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNzE2M2M4Yy1lZDZjLTExZWUtOTZmOC0wMDE1NWRiZGFmMzUiLCJuYW1lIjoiU2FuamF5YSIsImVtYWlsIjoic2FuamF5YS53c2RAZ21haWwuY29tIiwicGhvbmVOdW1iZXIiOiIwODEyNzg0MTcwNDAiLCJwZXJtaXNzaW9ucyI6bnVsbCwiaWF0IjoxNzEyMDYwNjM1LCJleHAiOjE3MTIwNjc4MzV9.ShVJoDflNVHbOOhQuoCTr90JeuXr1xXPSD-HoagSELU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/auth/revoke-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"revoke-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Presences",
+			"item": [
+				{
+					"name": "Get Employee Presences",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiQW5hbmRhIEJheXUiLCJlbWFpbCI6ImJheXVAZW1haWwuY29tIiwibnBwIjoiMTIzNDUiLCJpc19zdXBlcnZpc29yIjpmYWxzZSwic3VwZXJ2aXNvciI6eyJuYW1lIjoiU3VwZXJ2aXNvciIsIm5wcCI6IjExMTExIn0sImlhdCI6MTcxMjQyMzE2NSwiZXhwIjoxNzEyNDMwMzY1fQ.bUh3bFhsSgo_oT865ckhEdBdAqjDZo8CC6E-q2enjTM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/presences/get-presences/:userId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"presences",
+								"get-presences",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Employee Presences",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/presences/get-presences/:userId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"presences",
+										"get-presences",
+										":userId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "373"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"175-eSnXtVvVgj8xfgMri6Nf4Rrlz4s\""
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "connect.sid=s%3A-dKvpH2YP___d15gGg5vFPlZc6-mQsLQ.LAzG4Ftf3YxAEhAITndioCYWB5g5UpZXyeUf470KWxQ; Path=/; HttpOnly"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Apr 2024 15:52:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success get data\",\n    \"data\": [\n        {\n            \"id_user\": 1,\n            \"name_user\": \"Ananda Bayu\",\n            \"tanggal\": \"2024-04-06\",\n            \"waktu_masuk\": \"15:12:36\",\n            \"status_masuk\": \"APPROVED\",\n            \"waktu_pulang\": \"15:12:37\",\n            \"status_pulang\": \"REJECTED\"\n        },\n        {\n            \"id_user\": 1,\n            \"name_user\": \"Ananda Bayu\",\n            \"tanggal\": \"2020-10-16\",\n            \"waktu_masuk\": \"08:00:00\",\n            \"status_masuk\": \"REJECTED\",\n            \"waktu_pulang\": \"10:00:00\",\n            \"status_pulang\": \"APPROVED\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Supervised Employees",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiQW5hbmRhIEJheXUiLCJlbWFpbCI6ImJheXVAZW1haWwuY29tIiwibnBwIjoiMTIzNDUiLCJpc19zdXBlcnZpc29yIjpmYWxzZSwic3VwZXJ2aXNvciI6eyJuYW1lIjoiU3VwZXJ2aXNvciIsIm5wcCI6IjExMTExIn0sImlhdCI6MTcxMjQwMTI3MCwiZXhwIjoxNzEyNDA4NDcwfQ.BH013g8dFxl99mM01yYJ38Ynz2fI1xHN_vu8nDPXsM8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/presences/get-employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"presences",
+								"get-employees"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Employees",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/presences/get-employees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"presences",
+										"get-employees"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"53-jNgRbB16R95x3jRINLpNlBorYBs\""
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "connect.sid=s%3AsaD9AHGIpvRMNB3pHrzo03XdH3YwBxZ9.bttY5V0%2ByBRxgqY8OdTTeoZZGU22IRtaoJd9Rksh2ag; Path=/; HttpOnly"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Apr 2024 08:58:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success get data\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Ananda Bayu\",\n            \"npp\": \"12345\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Store Presences",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJuYW1lIjoiU3VwZXJ2aXNvciIsImVtYWlsIjoic3B2QGVtYWlsLmNvbSIsIm5wcCI6IjExMTExIiwiaXNfc3VwZXJ2aXNvciI6dHJ1ZSwic3VwZXJ2aXNvciI6bnVsbCwiaWF0IjoxNzEyNDI5NjIyLCJleHAiOjE3MTI0MzY4MjJ9.ro3WB5RkqH9lz0KTxi7xvBJm49YLM9ijj5Ax0TMQvKE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"OUT\",\r\n    \"waktu\": \"2024-04-07 09:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/presences/store-presence",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"presences",
+								"store-presence"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Store Presences",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"IN\",\r\n    \"waktu\": \"2020-10-16 08:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/presences/store-presence",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"presences",
+										"store-presence"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "134"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"86-UZGcp5jK4nrx0aMi9+lRnEw4ya4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Apr 2024 13:21:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success store presence data\",\n    \"data\": {\n        \"id\": 9,\n        \"user_id\": 1,\n        \"type\": \"IN\",\n        \"is_approve\": false,\n        \"time\": \"2020-10-16T01:00:00.000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Employee Approval Requests",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJuYW1lIjoiU3VwZXJ2aXNvciIsImVtYWlsIjoic3B2QGVtYWlsLmNvbSIsIm5wcCI6IjExMTExIiwiaXNfc3VwZXJ2aXNvciI6dHJ1ZSwic3VwZXJ2aXNvciI6bnVsbCwiaWF0IjoxNzEyNDI2OTE3LCJleHAiOjE3MTI0MzQxMTd9.L7rRrnfauNqXLMDEDMlKKiCM98u2nBXku2_rxSKM5aA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/presences/employee-approval/:userId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"presences",
+								"employee-approval",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Employee Approval Requests",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/presences/employee-approval/:userId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"presences",
+										"employee-approval",
+										":userId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "280"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"118-swLfa0LklwnJRCojKvp3tdWms2M\""
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "connect.sid=s%3ANJLEW9qDejbwiqANv-qA-lRaAPXcnzlc.G4dvSSHOEJz7r5t0tMrGL21UP15islxvtV1FeGvG18k; Path=/; HttpOnly"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Apr 2024 18:16:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success get presence approval requests\",\n    \"data\": [\n        {\n            \"id_user\": 1,\n            \"nama\": \"Ananda Bayu\",\n            \"type\": \"OUT\",\n            \"status\": \"APPROVED\",\n            \"tanggal\": \"2024-04-06\",\n            \"waktu\": \"15:12:37\"\n        },\n        {\n            \"id_user\": 1,\n            \"nama\": \"Ananda Bayu\",\n            \"type\": \"IN\",\n            \"status\": \"APPROVED\",\n            \"tanggal\": \"2024-04-06\",\n            \"waktu\": \"15:12:36\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Approval",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJuYW1lIjoiU3VwZXJ2aXNvciIsImVtYWlsIjoic3B2QGVtYWlsLmNvbSIsIm5wcCI6IjExMTExIiwiaXNfc3VwZXJ2aXNvciI6dHJ1ZSwic3VwZXJ2aXNvciI6bnVsbCwiaWF0IjoxNzEyNDIzNjEwLCJleHAiOjE3MTI0MzA4MTB9.M6rjDOrwH11O_CM2B9tVVQMh6ltb2i_ojX5h-aTnMpY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"approve\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/presences/presence-approval/:presenceId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"presences",
+								"presence-approval",
+								":presenceId"
+							],
+							"variable": [
+								{
+									"key": "presenceId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Approval",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"approve\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/presences/presence-approval/:presenceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"presences",
+										"presence-approval",
+										":presenceId"
+									],
+									"variable": [
+										{
+											"key": "presenceId",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "137"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"89-aiOlEOv8a/ruzkxmCg83F/keG+g\""
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "connect.sid=s%3A60SoCQVB1lA2ZMqq2mQsGuuAlODVedN2.1iSnLHBnVqHJ5a9ylcioEJbdaQEQedkM9HUZvPkvfiA; Path=/; HttpOnly"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Apr 2024 17:05:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success update presence status\",\n    \"data\": {\n        \"id\": 2,\n        \"user_id\": 1,\n        \"type\": \"OUT\",\n        \"is_approve\": true,\n        \"time\": \"2024-04-06T08:12:37.006Z\"\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
