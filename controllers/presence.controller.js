@@ -24,65 +24,45 @@ const getPresences = (async (req, res) => {
     await presences(user_id).then((presences) => {
         let presencesArr = [];
 
-        let inArr = [];
-        let outArr = [];
-
-        presences.forEach((element) => {
-            if (element.type === "OUT") {
-                outArr.push({
-                    user_id: element.user_id,
-                    name: element.employee.name,
-                    type: element.type,
-                    is_approve: element.is_approve,
-                    date: DateTime.fromJSDate(element.time).toFormat('yyyy-LL-dd'),
-                    time: DateTime.fromJSDate(element.time).toFormat('HH:mm:ss')
-                })
-            } else {
-                inArr.push({
-                    user_id: element.user_id,
-                    name: element.employee.name,
-                    type: element.type,
-                    is_approve: element.is_approve,
-                    date: DateTime.fromJSDate(element.time).toFormat('yyyy-LL-dd'),
-                    time: DateTime.fromJSDate(element.time).toFormat('HH:mm:ss')
-                })
+        const group = presences.reduce((group, presence) => {
+            let date = DateTime.fromJSDate(presence.time).toFormat('yyyy-LL-dd');
+            if (group[date] == null) {
+                group[date] = {}
             }
+            group[date][presence.type] = {
+                user_id: presence.user_id,
+                name: presence.employee.name,
+                type: presence.type,
+                is_approve: presence.is_approve,
+                date: DateTime.fromJSDate(presence.time).toFormat('yyyy-LL-dd'),
+                time: DateTime.fromJSDate(presence.time).toFormat('HH:mm:ss')
+            }
+            return group
+        }, {})
 
-        });
+        const groupKey = Object.keys(group)
 
-        for (let i = 0; i < inArr.length; i++) {
-            if (outArr[i] !== undefined) {
+        for (let i = 0; i < groupKey.length; i++) {
+            if (group[groupKey[i]]?.OUT !== undefined) {
                 presencesArr.push({
-                    id_user: inArr[i].user_id,
-                    name_user: inArr[i].name,
-                    tanggal: inArr[i].date,
-                    waktu_masuk: inArr[i].time,
-                    status_masuk: inArr[i].is_approve ? 'APPROVED' : 'REJECTED',
-                    waktu_pulang: outArr[i].time,
-                    status_pulang: outArr[i].is_approve ? 'APPROVED' : 'REJECTED'
+                    id_user: group[groupKey[i]].IN.user_id,
+                    name_user: group[groupKey[i]].IN.name,
+                    tanggal: group[groupKey[i]].IN.date,
+                    waktu_masuk: group[groupKey[i]].IN.time,
+                    status_masuk: group[groupKey[i]].IN.is_approve ? 'APPROVED' : 'REJECTED',
+                    waktu_pulang: group[groupKey[i]].OUT.time,
+                    status_pulang: group[groupKey[i]].OUT.is_approve ? 'APPROVED' : 'REJECTED'
                 })
             } else {
-                if (inArr[i].is_approve === null) {
-                    presencesArr.push({
-                        id_user: inArr[i].user_id,
-                        name_user: inArr[i].name,
-                        tanggal: inArr[i].date,
-                        waktu_masuk: inArr[i].time,
-                        status_masuk: "WAITING",
-                        waktu_pulang: null,
-                        status_pulang: "WAITING"
-                    })
-                } else {
-                    presencesArr.push({
-                        id_user: inArr[i].user_id,
-                        name_user: inArr[i].name,
-                        tanggal: inArr[i].date,
-                        waktu_masuk: inArr[i].time,
-                        status_masuk: inArr[i].is_approve ? 'APPROVED' : 'REJECTED',
-                        waktu_pulang: null,
-                        status_pulang: "WAITING"
-                    })
-                }
+                presencesArr.push({
+                    id_user: group[groupKey[i]].IN.user_id,
+                    name_user: group[groupKey[i]].IN.name,
+                    tanggal: group[groupKey[i]].IN.date,
+                    waktu_masuk: group[groupKey[i]].IN.time,
+                    status_masuk: group[groupKey[i]].IN.is_approve ? 'APPROVED' : 'REJECTED',
+                    waktu_pulang: null,
+                    status_pulang: "WAITING"
+                })
             }
         }
 
